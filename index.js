@@ -19,7 +19,7 @@ fastify.get('/deliversms', async (request, reply) => {
 })
 
 // Run the server!
-export default async (req, res) => {
+module.exports = async (req, res) => {
     await fastify.ready();
     fastify.server.emit('request', req, res);
 }
