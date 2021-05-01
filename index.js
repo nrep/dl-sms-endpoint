@@ -1,3 +1,4 @@
+"use strict";
 const fastify = require('fastify')({ logger: true })
 const { MongoClient } = require("mongodb");
 const { DeliveryResponse } = require('./models');
@@ -18,12 +19,7 @@ fastify.get('/deliversms', async (request, reply) => {
 })
 
 // Run the server!
-const start = async () => {
-    try {
-        await fastify.listen(3000)
-    } catch (err) {
-        fastify.log.error(err)
-        process.exit(1)
-    }
+export default async (req, res) => {
+    await fastify.ready();
+    fastify.server.emit('request', req, res);
 }
-start()
